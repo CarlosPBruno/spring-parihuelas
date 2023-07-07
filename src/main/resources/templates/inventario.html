@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+   
+    <title>Inventario - Grissi Constructores S.A</title>
+</head>
+
+<body style="margin:20px 50px"> 	
+ 		 		<h2>Inventario</h2>
+				<div style="margin-bottom: 15px" class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<a  class="btn btn-primary me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#miModal"> Agregar Parihuela</a>
+				</div>
+				
+				<div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+					<div class="modal-dialog modal-dialog-centered modal-md">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="modalTitle">Agregar Parihuela</h4>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<form class="form-horizontal" th:action="@{/inventario/guardar}" method="post" enctype="multipart/form-data">
+							<div class="modal-body">
+								<h2>Agregar Parihuela</h2>
+							    	<div class="form-group">
+							      		<label class="control-label col-sm-2" for="nombre">Tipo de Parihuela:</label>
+							      		<div class="col-sm-10">
+							        		<input type="text" class="form-control" id="tipo" name="tipo" placeholder="Ingresar tipo de parihuela" autocomplete="off" required>
+							      		</div>
+							    	</div>
+							    	
+							    	<div class="form-group">
+							      		<label class="control-label col-sm-2" for="nombre">Dimensiones:</label>
+							      		<div class="col-sm-10">
+							        		<input type="text" class="form-control" id="dimensiones" name="dimensiones" placeholder="Ingresar dimensiones" autocomplete="off" required>
+							      		</div>
+							    	</div>
+							    	
+							    	<div class="form-group">
+							      		<label class="control-label col-sm-2" for="nombre">Material:</label>
+							      		<div class="col-sm-10">
+							        		<input type="text" class="form-control" id="material" name="material" placeholder="Ingresar material" autocomplete="off" required>
+							      		</div>
+							    	</div>
+							    	
+							    	<!-- <div class="form-group">
+							      		<label class="control-label col-sm-2" for="nombre">Cantidad Disponible:</label>
+							      		<div class="col-sm-10">
+							        		<input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar cantidad" autocomplete="off" required>
+							      		</div>
+							    	</div>
+							    
+								    <div class="form-group">
+								      <label class="control-label col-sm-2" for="descripcion">Precio:</label>
+								      <div class="col-sm-10">
+								        <input type="number" class="form-control" id="precio" name="precio"
+								        placeholder="Ingresar precio.." autocomplete="off" required>
+								      </div>
+								    </div> -->
+							</div>
+							<div class="modal-footer">
+								<div class="row">
+						          <div class="col-sm-2">
+						            <button type="submit" class="btn btn-success"> Guardar</button>
+						          </div>             
+						        </div>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+		
+				<table id="table" class="table table-bordered table-striped">
+		 			<thead>
+		    			<tr>
+		      				<th  scope="col">Tipo Parihuela</th>
+					      	<th  scope="col">Dimensiones</th>
+					      	<th  scope="col">Material</th>
+					      	<!-- <th  scope="col">Cantidad Disponible</th>
+					      	<th  scope="col">Precio</th> -->
+					      	<th  scope="col">Acción</th>
+			        	  	<th  scope="col">Acción</th>
+		    			</tr>
+		 	 		</thead>
+		  			<tbody>
+		    			<tr th:each="inv:${inventario}">
+							<td  th:text="${inv.tipo_parihuela}"></td>
+							<td  th:text="${inv.dimensiones}"></td>
+							<td  th:text="${inv.material}"></td>
+							<!-- <td  th:text="${inv.cantidad_disponible}"></td>
+							<td  th:text="${inv.precio_unitario}"></td>	 -->
+							<td><a type="button" class="btn btn-warning" th:href="@{/inventario/editar/{id} (id=${inv.id})}">Editar</a> 
+        					<td><a type="button" class="btn btn-danger" th:href="@{/inventario/eliminar/{id} (id=${inv.id})}">Eliminar</a> </td>			
+						</tr>
+		  			</tbody>
+				</table>
+				
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>			
+</body>
+
+</html>
